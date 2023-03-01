@@ -82,7 +82,7 @@ public class RsvpRepoImpl {
     //      comments = ? where email = ?
     public boolean update(RSVP rsvp) {
         int result = jdbcTemplate.update(SQL_UPDATE, rsvp.getFullName(), rsvp.getPhone(),
-                rsvp.getConfirmationDate(), rsvp.getComments(),rsvp.getEmail());
+                rsvp.getConfirmationDate(), rsvp.getComments(), rsvp.getEmail());
         return result > 0;
     }
 

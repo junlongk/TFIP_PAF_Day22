@@ -107,8 +107,18 @@ public class RSVPController {
     // Update RSVP
     @PutMapping(path = "/rsvp/{email}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ResponseEntity<String> updateRSVP(@PathVariable String email,
-                                             @RequestBody RSVP rsvp) {
-        boolean updated = rsvpRepo.update(rsvp);
+                                             @RequestParam("name") String name,
+                                             @RequestParam("phone") int phone,
+                                             @RequestParam("confirmation_date") Date confirmation_date,
+                                             @RequestParam("comments") String comments) {
+        RSVP updatedRSVP = new RSVP();
+        updatedRSVP.setFullName(name);
+        updatedRSVP.setEmail(email);
+        updatedRSVP.setPhone(phone);
+        updatedRSVP.setConfirmationDate(confirmation_date);
+        updatedRSVP.setComments(comments);
+
+        boolean updated = rsvpRepo.update(updatedRSVP);
         if (updated)
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body("RSVP updated successfully");
